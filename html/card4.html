@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Card 4</title>
+
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+  }
+
+  #cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: blur(12px) brightness(60%);
+    transition: filter 2s ease;
+  }
+
+  #playButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(143, 140, 141);
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background 0.3s ease, opacity 1s ease;
+    z-index: 10;
+  }
+
+  #playButton:hover {
+    background-color: gray;
+  }
+
+  #playButton.fadeOut {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.8;
+    z-index: 20;
+    transition: background 0.3s ease, opacity 0.3s ease;
+  }
+
+  #backButton:hover {
+    background-color: gray;
+    opacity: 1;
+  }
+</style>
+</head>
+
+<body>
+  <audio id="bgMusic" src="../assets/confession-4 (1).mp3" preload="auto"></audio>
+
+  <img id="cardImage" src="../assets/card4.png" alt="card4" />
+
+  <button id="playButton">Click to Begin</button>
+  <button id="backButton">Back</button>
+
+  <script>
+    const playBtn = document.getElementById("playButton");
+    const music = document.getElementById("bgMusic");
+    const image = document.getElementById("cardImage");
+    const backBtn = document.getElementById("backButton");
+
+    playBtn.onclick = async () => {
+      try {
+        music.volume = 0.6;
+        await music.play();
+        image.style.filter = "blur(0px) brightness(100%)";
+        playBtn.classList.add("fadeOut");
+
+        setTimeout(() => {
+          document.body.onclick = () => {
+            window.location.href = "love letter 2.html";
+          };
+        }, 2000);
+      } catch (e) {
+        alert("⚠️ Audio could not play. Please click again or check the path.");
+        console.error(e);
+      }
+    };
+
+    backBtn.onclick = () => {
+      window.location.href = "love letter 2.html"; 
+    };
+  </script>
+</body>
+</html>

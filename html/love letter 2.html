@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Love letter for crush</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/love letter 2.css?v=1" />
+
+    <style>
+      body {
+        opacity: 0;
+        transition: opacity 2.5s ease;
+      }
+      body.fade-in {
+        opacity: 1;
+      }
+
+      #startBox {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        padding: 20px 40px;
+        text-align: center;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 2em;
+        color: #565555;
+        cursor: pointer;
+        z-index: 99999;
+        transition: opacity 1s ease, transform 1s ease;
+      }
+      #startBox.fadeOut {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+        pointer-events: none;
+      }
+
+      #creepyScene {
+        position: fixed;
+        inset: 0;
+        background: url("../assets/bulbBG.jpg") center/cover no-repeat;
+        opacity: 0;
+        z-index: 9998;
+        transition: opacity 3s ease;
+      }
+
+      #sceneOverlay {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        opacity: 0;
+        z-index: 9997;
+        transition: opacity 1s ease;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--  Envelopes -->
+    <div class="envelopes">
+      <div class="envelope-card">
+        <div class="envlope-wrapper">
+          <div class="envelope close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+            <div class="letter">
+              <img class="letter-image" src="../assets/card1.png" alt="card1" />
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="btn-open">open</button>
+          <button class="btn-close">close</button>
+        </div>
+      </div>
+
+      <div class="envelope-card">
+        <div class="envlope-wrapper">
+          <div class="envelope close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+            <div class="letter">
+              <img class="letter-image" src="../assets/card2.png" alt="card2" />
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="btn-open">open</button>
+          <button class="btn-close">close</button>
+        </div>
+      </div>
+
+      <div class="envelope-card">
+        <div class="envlope-wrapper">
+          <div class="envelope close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+            <div class="letter">
+              <img class="letter-image" src="../assets/card3.png" alt="card3" />
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="btn-open">open</button>
+          <button class="btn-close">close</button>
+        </div>
+      </div>
+
+      <div class="envelope-card">
+        <div class="envlope-wrapper">
+          <div class="envelope close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+            <div class="letter">
+              <img class="letter-image" src="../assets/card4.png" alt="card4" />
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="btn-open">open</button>
+          <button class="btn-close">close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="confession-wrapper">
+      <img
+        src="../assets/confession.jpg"
+        alt="confession"
+        class="confession-img"
+      />
+    </div>
+
+  
+
+ 
+    <div
+      id="mails"
+      style="display: none; text-align: center; margin-top: 20px"
+    >
+      <img
+        src="../assets/ConfessionBox.png"
+        alt="Confession Box"
+        style="width: 250px; max-width: 80%"
+      />
+    </div>
+
+    <audio
+      id="introNarration"
+      src="../assets/introNarration.mp3"
+      onplay="this.currentTime=15"
+    ></audio>
+
+    <div id="startBox"><p>Click to see the confessions...</p></div>
+
+   
+    <img
+      src="../assets/GoToArtroom.png"
+      id="goToArtroomButton"
+      alt="Go To Artroom"
+    />
+    <div id="creepyScene"></div>
+    <div id="sceneOverlay"></div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/love letter 2.js"></script>
+
+    <script>
+      
+      window.addEventListener("load", () =>
+        document.body.classList.add("fade-in")
+      );
+
+      
+      const startBox = document.getElementById("startBox");
+      const intro = document.getElementById("introNarration");
+      const envelopes = document.querySelectorAll(".envelope-card");
+
+      startBox.addEventListener("click", async () => {
+        startBox.classList.add("fadeOut");
+        intro.volume = 0.7;
+        try {
+          await intro.play();
+        } catch (e) {
+          console.warn("Autoplay blocked:", e);
+        }
+
+        setTimeout(() => {
+          envelopes.forEach((env, i) =>
+            setTimeout(() => env.classList.add("show", "pop"), i * 600)
+          );
+        }, 1000);
+      });
+
+  
+      document.addEventListener("DOMContentLoaded", function () {
+        const confessionBtn = document.getElementById("confessionButton");
+        const mailsBox = document.getElementById("mails");
+
+        if (!confessionBtn || !mailsBox) return;
+
+        const alreadyClicked = localStorage.getItem("confessionClicked");
+
+        if (alreadyClicked === "true") {
+          confessionBtn.style.display = "none";
+          mailsBox.style.display = "block";
+        }
+
+        confessionBtn.addEventListener("click", () => {
+          localStorage.setItem("confessionClicked", "true");
+          confessionBtn.style.display = "none";
+          mailsBox.style.display = "block";
+        });
+      });
+
+      // Go to artroom scene
+      const goButton = document.getElementById("goToArtroomButton");
+      const overlay = document.getElementById("sceneOverlay");
+      const creepyScene = document.getElementById("creepyScene");
+
+      goButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        overlay.style.opacity = "1";
+
+        setTimeout(() => {
+          creepyScene.style.opacity = "1";
+          const creepyMusic = new Audio("../audios/narrator and final note.mp3");
+          creepyMusic.volume = 1.0;
+          creepyMusic.play().catch((err) => console.warn("Audio blocked:", err));
+        }, 1500);
+
+        setTimeout(() => {
+          window.location.href = "eyes-animation.html";
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>

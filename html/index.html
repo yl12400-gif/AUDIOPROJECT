@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Light Bulb</title>
+    <script src="../js/background-music.js"></script>
+
+  </head>
+
+  <body>
+    <div class="lamp" style="cursor: pointer;">
+      <div class="lamp__wire"></div>
+      <div class="lamp__bulb">
+        <div class="lamp__bulb__filament">
+          <div class="lamp__bulb__filament__base"></div>
+          <div class="lamp__bulb__filament__tungsten">
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--1"></div>
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--2"></div>
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--3"></div>
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--4"></div>
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--5"></div>
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--6"></div>
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--7"></div>
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--8"></div>
+            <div class="lamp__bulb__filament__tungsten__winding lamp__bulb__filament__tungsten__winding--9"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="instruction"><span>C</span><span>l</span><span>i</span><span>c</span><span>k</span></div>
+
+    <img src="../assets/Begin.png" id="beginButton" alt="Begin" />
+
+    <script src="../js/light-bulb.js"></script>
+
+    <button id="toggle-sound" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+">🔊</button>
+
+<script>
+  const btn = document.getElementById("toggle-sound");
+  btn.addEventListener("click", () => {
+    const music = window.backgroundMusic;
+    if (music.paused) {
+      music.play();
+      btn.textContent = "🔊";
+    } else {
+      music.pause();
+      btn.textContent = "🔈";
+    }
+  });
+</script>
+  </body>
+</html>
